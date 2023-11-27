@@ -15,9 +15,9 @@ app.use(cors({
 }));
 
 //config
-if(process.env.NODE_ENV!=="PRODUCTION"){
+// if(process.env.NODE_ENV!=="PRODUCTION"){
     require("dotenv").config({path:"Backend/Config/.env"});
-}
+// }
 // iske baad kyoki usko env variables ki need hai 
 
 app.use(express.json());
@@ -36,6 +36,8 @@ app.use("/api/v1",product);
 app.use("/api/v1",user);
 app.use("/api/v1",order);
 app.use("/api/v1",payment);
+
+console.log(path.join(__dirname,"../Frontend/dist"))
 
 app.use(express.static(path.join(__dirname,"../Frontend/dist")));
 
