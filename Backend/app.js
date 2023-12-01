@@ -37,8 +37,6 @@ app.use("/api/v1",user);
 app.use("/api/v1",order);
 app.use("/api/v1",payment);
 
-// app.use(express.static(path.join(__dirname,"../Frontend/dist")));
-
 // app.get("*",(req,res)=>{
 //     res.sendFile(path.resolve(__dirname,"../Frontend/dist/index.html"))
 // })
