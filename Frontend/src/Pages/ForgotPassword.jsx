@@ -19,12 +19,19 @@ const ForgotPassword = () => {
   const dispatch = useDispatch();
   let navigateTo = useNavigate();
   const status = useSelector((state) => state.user.status);
+  const mailsent = useSelector((state) => state.user.mailsent);
 
   useEffect(() => {
     if (status === "authenticated") {
         navigateTo(`/account`);
       }
-  }, [status]);
+    if(mailsent === true){
+      alert("Email Sent Successfully");
+    }
+    else if(mailsent === false){
+      alert("Error while sending mail");
+    }
+  }, [status,dispatch]);
 
   const formik = useFormik({
     initialValues: {
