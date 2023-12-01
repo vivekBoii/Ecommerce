@@ -44,11 +44,12 @@ export default function SignUp() {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
+
   useEffect(() => {
-    if (status === "success") {
+    if(status === "authenticated"){
       navigateTo(`/account`);
     }
-  }, [status, avatarPreview]);
+  }, [dispatch,status, avatarPreview,error]);
 
   const formik = useFormik({
     initialValues: {
@@ -59,14 +60,16 @@ export default function SignUp() {
     },
     onSubmit: (values) => {
       values.avatar = avatar;
-      dispatch(SignUpRequest(values));
+      if(values.name.length<3){
+        alert("Name should be greater than 3 Character");
+      }
+      else{
+        dispatch(SignUpRequest(values));
+      }
     },
   });
   return (
     <>
-      {error && (
-        <AlertBox type='error' message={"Invalid SignUp Credentials"} />
-      )}
       <Flex
         minH={{ base: "80vh", md: "85vh" }}
         justify={"center"}

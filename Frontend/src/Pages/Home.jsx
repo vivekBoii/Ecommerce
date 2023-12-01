@@ -36,7 +36,6 @@ const Home = () => {
   const products = useSelector((state) => state.products);
   const navigateTo = useNavigate();
 
-
   useEffect(() => {
     dispatch(fetchAllProduct({}));
   }, [dispatch]);
@@ -81,12 +80,12 @@ const Home = () => {
                 rounded={"full"}
                 color={"white"}
                 fontSize={"xl"}
-                colorScheme="green"
+                colorScheme='green'
                 p={5}
                 fontWeight={500}
-                onClick={(e)=>{
+                onClick={(e) => {
                   e.preventDefault();
-                  navigateTo('/Products');
+                  navigateTo("/Products");
                 }}
               >
                 Explore Now
@@ -149,7 +148,7 @@ const Home = () => {
           })}
         </SimpleGrid>
       </Box>
-      <Box maxW={"7xl"} mx={"auto"}>
+      <Box maxW={"7xl"} mx={"auto"} position={"relative"}>
         <Text
           color={"black"}
           fontWeight={500}
@@ -160,16 +159,18 @@ const Home = () => {
         >
           Our Top Products
         </Text>
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={10}>
-          {products.status === "loading" ? (
+        {products.status === "loading" ? (
+          <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
             <Loader />
-          ) : (
-            products.productItem &&
-            products.productItem.map((item) => {
-              return <Scard key={item._id} product={item} />;
-            })
-          )}
-        </SimpleGrid>
+          </Box>
+        ) : (
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={10}>
+            {products.productItem &&
+              products.productItem.map((item) => {
+                return <Scard key={item._id} product={item} />;
+              })}
+          </SimpleGrid>
+        )}
       </Box>
       <Flex
         w={"full"}
@@ -189,18 +190,25 @@ const Home = () => {
           mx={"auto"}
           px={useBreakpointValue({ base: 4, md: 20 })}
         >
-          <Stack maxW={"xl"} spacing={6} bg={"#003D29"} color={"white"} p={"14"}>
+          <Stack
+            maxW={"xl"}
+            spacing={6}
+            bg={"#003D29"}
+            color={"white"}
+            p={"14"}
+          >
             <Heading fontSize={"5xl"} fontWeight={500} fontFamily={"poppins"}>
-            Get 5% Cash Back On $200
+              Get 5% Cash Back On $200
             </Heading>
             <Text
               fontWeight={400}
               lineHeight={1.2}
               fontSize={useBreakpointValue({ base: "3xl", md: "2xl" })}
             >
-              Shopping is a bit of a relaxing hobby for me, which is sometimes troubling for the bank balance.
+              Shopping is a bit of a relaxing hobby for me, which is sometimes
+              troubling for the bank balance.
             </Text>
-            <Stack direction={"row"} >
+            <Stack direction={"row"}>
               <Button
                 bg={"#003D29"}
                 rounded={"full"}
@@ -209,10 +217,10 @@ const Home = () => {
                 fontSize={"xl"}
                 p={6}
                 fontWeight={500}
-                colorScheme="green"
-                onClick={(e)=>{
+                colorScheme='green'
+                onClick={(e) => {
                   e.preventDefault();
-                  navigateTo('/Products');
+                  navigateTo("/Products");
                 }}
               >
                 Explore Now
@@ -284,7 +292,8 @@ const Scard = ({ product }) => {
             <Button
               onClick={(e) => {
                 e.preventDefault();
-                dispatch(addToCartRequest({ Id: product._id, quantity: 1 }));
+                dispatch(addToCartRequest({ id: product._id, quantity: 1 }));
+                alert("Added to Cart Successfully")
               }}
               variant='ghost'
               colorScheme='green'
