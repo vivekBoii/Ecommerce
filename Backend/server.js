@@ -15,9 +15,9 @@ process.on("uncaughtException",(err)=>{
 })
 
 //config
-if(process.env.NODE_ENV!=="PRODUCTION"){
+// if(process.env.NODE_ENV!=="PRODUCTION"){
     require("dotenv").config({path:"Backend/Config/.env"});
-}
+// }
 // iske baad kyoki usko env variables ki need hai 
 ConnectDatabase().catch(err => console.log(err));
 
